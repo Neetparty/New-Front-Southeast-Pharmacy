@@ -82,8 +82,13 @@ export default function Navbar() {
 
     useEffect(() => {
         const cookieExists = checkCookieExist('accessToken');
+        const localUser = localStorage.getItem('user') as string
+
+        if (localUser && !user.user_id){
+            loadUser()
+        }
+
         if(!user.user_id && cookieExists){
-            console.log('load user')
             loadUser()
         }
         else if(banner.length === 0 || category.length === 0){

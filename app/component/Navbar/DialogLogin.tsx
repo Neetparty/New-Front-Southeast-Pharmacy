@@ -193,6 +193,15 @@ export default function DialogLogin({
                     user_id: data.user.user_id,
                     user_name: data.user.user_name
                 }
+                localStorage.setItem("user", JSON.stringify({
+                    email: data.user.email,
+                    first_name: data.user.first_name,
+                    last_name: data.user.last_name,
+                    image: data.user.image,
+                    role: data.user.role,
+                    user_id: data.user.user_id,
+                    user_name: data.user.user_name
+                }))
                 dispatch(addUser(user))
             }
         }
