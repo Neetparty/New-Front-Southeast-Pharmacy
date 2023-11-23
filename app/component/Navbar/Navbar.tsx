@@ -16,6 +16,7 @@ import { addCategory } from '@/app/GlobalRedux/Features/category/categorySlice';
 import { addBanner } from '@/app/GlobalRedux/Features/banner/bannerSlice';
 import { selectBannerData, selectCategoryData, selectLangData, selectUserData } from '@/app/GlobalRedux/Features/selector';
 import { addLang } from '@/app/GlobalRedux/Features/lang/langSlice';
+import { session } from '@/app/hook/session';
 
 
 export default function Navbar() {
@@ -81,23 +82,24 @@ export default function Navbar() {
     
 
     useEffect(() => {
-        const cookieExists = checkCookieExist('accessToken');
+        const token = localStorage.getItem('token') as string
         const localUser = localStorage.getItem('user') as string
 
-        if (localUser && !user.user_id){
+        if (localUser && !user.user_id  && token) {
             loadUser()
         }
-
-        if(!user.user_id && cookieExists){
+        else if(!localUser && !user.user_id && token) {
             loadUser()
         }
-        else if(banner.length === 0 || category.length === 0){
+        else if(!localUser && !user.user_id && !token) {
             loadBannerAndCategory()
         }
+
     }, [user])
     
     async function handleLogout() {
         const {data, error} = await LogOut();
+        localStorage.removeItem("user");
         dispatch(removeUser(null));
         window.location.reload();
     }
@@ -330,4 +332,8 @@ async function loadBannerAndCategory() {
     }
     
 }
+}
+
+function removeCategory(): any {
+    throw new Error('Function not implemented.');
 }

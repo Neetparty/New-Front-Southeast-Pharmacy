@@ -40,7 +40,6 @@ export default function CardDetail({
 
     return (
         <div className="max-h-[31rem]  w-full border border-slate-200 rounded-xl flex flex-col bg-white text-slate-800">
-
             <div className="relative w-full h-[21rem] max-h-[21rem]">
                 <Image
                     alt={productName}

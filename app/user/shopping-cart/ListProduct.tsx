@@ -59,7 +59,7 @@ export default function ListProduct() {
                 <div className="border shadow-lg rounded-lg p-4">
                     <div className="flex gap-4 items-center">
                     <CheckBox
-                    onChange={onChangeCheckAll}
+                    onClick={onChangeCheckAll}
                     checked={state.checkAll}
                     />
                     <h6> {t("shopingcartChooseAll")} </h6>
@@ -81,7 +81,7 @@ export default function ListProduct() {
                     <div className="flex gap-2 items-center flex-col md:flex-row">
                         <CheckBox
                         checked={item.check}
-                        onChange={() => handleChangeCheckBoxItem(item.product_id)}
+                        onClick={() => handleChangeCheckBoxItem(item.product_id)}
                         />
                         <div className="relative w-[8rem] h-[8rem]">
                             <Image
@@ -303,17 +303,18 @@ function minusTotalProduct(productId:string){
 
 function handleChangeCheckBoxItem(productId: string) {
     setState(prev => {
-        let tempProduct = [...prev.product]
-        for (let i = 0; i < tempProduct.length; i++) {
-            if(tempProduct[i].product_id === productId){
-                tempProduct[i].check = !tempProduct[i].check
-                break;
-            }            
-        }
-        
-        return {...prev, product:tempProduct}
-        
-    })    
+        const tempProduct = prev.product.map(item => {
+            if (item.product_id === productId) {
+                return {
+                    ...item,
+                    check: !item.check
+                };
+            }
+            return item;
+        });
+
+        return { ...prev, product: tempProduct };
+    });
 }
 
 function onChangeCheckAll() {

@@ -28,6 +28,15 @@ export default function Table() {
     index: 0
   })
 
+  const [cache, setCache] = useState<ShippingTable[]>([])
+
+  const onSearch = (search: string) => {
+
+    const data = cache.filter((elem) => elem.name.includes(search))
+
+    return setState(prev => ({ ...prev, shippingT: data, search }))
+  }
+
   useEffect(() => {
 
     LoadData()
@@ -41,7 +50,7 @@ export default function Table() {
           <h6 className="">ค้นหาขนส่ง</h6>
           <Input
             value={state.search}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setState(prev => ({ ...prev, search: e.target.value }))}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onSearch(e.target.value)}
             placeholder="ค้นหา"
           />
         </div>
@@ -193,6 +202,7 @@ export default function Table() {
     }
     else {
       setState((prev) => ({ ...prev, shippingT: data.shipping, loading: false }))
+      setCache(data.shipping)
     }
   }
 

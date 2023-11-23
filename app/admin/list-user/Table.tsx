@@ -125,17 +125,17 @@ function renderTableData(item:User, key:number) {
           value={state.select}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setState(prev => ({ ...prev, select: e.target.value, index: key }))}
         >
-          <option value={"setting"}>แก้ไข</option>
+          <option value={"select"}>เลือก</option>
           <option value={"update"}>อัพเดต</option>
           {/* <option value={"delete"}>ลบ</option> */}
         </select>
         :
         <select
           className="border text-slate-700 text-sm rounded-lg block p-2 outline-none placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-          value={"setting"}
+          value={"select"}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setState(prev => ({ ...prev, select: e.target.value, index: key }))}
         >
-          <option value={"setting"}>แก้ไข</option>
+          <option value={"select"}>เลือก</option>
           <option value={"update"}>อัพเดต</option>
           {/* <option value={"delete"}>ลบ</option> */}
         </select>

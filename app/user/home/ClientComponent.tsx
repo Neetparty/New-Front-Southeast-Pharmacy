@@ -11,6 +11,7 @@ import OrderByGeneration from "./OrderByGeneration";
 import Footer from "@/app/component/Footer/Footer";
 import { useTranslation } from "react-i18next";
 import CardDetail from "../search/CardDetail";
+import Link from "next/link";
 export default function ClientComponent({ data }: {
   data: {
     msg: string
@@ -50,7 +51,7 @@ export default function ClientComponent({ data }: {
     }
   }
 
- 
+
 
   return (
     <>
@@ -90,23 +91,26 @@ export default function ClientComponent({ data }: {
               <h6 className="text-xl text-slate-500">คุณอาจจะชอบสินค้านี้</h6>
               <div className="sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-8 justify-items-center flex gap-2 flex-wrap" >
                 {data.randomProduct.map((item, i) => (
+
                   <div className="w-full" key={i}>
-                    <CardDetail
-                      handleLang={handleLang}
-                      image={item.image}
-                      price={item.price}
-                      productName={item.product_name}
-                      productNameCn={item.product_name_cn}
-                      productNameEn={item.product_name_en}
-                      product_id={item.product_id}
-                      promotion_price={item.promotion_price}
-                      promotion_status={item.promotion_status}
-                      sell_total={item.sell_total}
-                      description={item.description}
-                      descriptionEn={item.description_en}
-                      descriptionCn={item.description_cn}
+                  
+                      <CardDetail
+                        handleLang={handleLang}
+                        image={item.image}
+                        price={item.price}
+                        productName={item.product_name}
+                        productNameCn={item.product_name_cn}
+                        productNameEn={item.product_name_en}
+                        product_id={item.product_id}
+                        promotion_price={item.promotion_price}
+                        promotion_status={item.promotion_status}
+                        sell_total={item.sell_total}
+                        description={item.description}
+                        descriptionEn={item.description_en}
+                        descriptionCn={item.description_cn}
                       />
                   </div>
+
                 ))}
               </div>
             </div>

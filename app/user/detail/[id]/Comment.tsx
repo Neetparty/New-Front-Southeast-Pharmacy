@@ -1,12 +1,22 @@
 "use client"
 
 import { Icon } from "@iconify/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DetailState } from "./detail-type";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { CreateComment } from "./detail-api";
 import moment from "moment";
+
+interface IComment {
+    message: string;
+    rating: number;
+    created_at: string;
+    user: {
+        user_name: string;
+        image: string;
+    }
+}
 
 export default function Comment({
     state,
@@ -18,7 +28,22 @@ export default function Comment({
     averageRating:string;
 }) {
 
+    const [comment, setComment] = useState<IComment[]>([]);
+    const [cache, setCache] = useState<IComment[]>(state.comment)
+
     const createCommentRef = useRef<HTMLTextAreaElement  | null>(null)
+
+    const ArrayStar = [5,4,3,2,1];
+
+    const commentFilter = (rate:number) => {
+        const newComment = comment.filter(comment => comment.rating === rate);
+        return setCache(newComment);
+    }
+
+    useEffect(() => {
+        setComment(state.comment);
+        setCache(state.comment);
+    }, [state.comment])
 
     
     async function handleCreateComment(e:React.MouseEvent<HTMLButtonElement>) {
@@ -62,19 +87,23 @@ export default function Comment({
 
                                 <button
                                     className="flex flex-col items-center bg-white border border-gray-200 rounded-lg  md:flex-row  hover:bg-gray-100 h-10"
+                                    onClick={() => setCache(state.comment)}
                                 >
                                     <h1 className="font-normal text-gray-700 my-2 px-2">ทั้งหมด ({state.comment.length})</h1>
                                 </button>
 
-                               {Object.entries(state.ratingCount).reverse().map(([rating, count]) => (
-                               <button
-                                    className="flex flex-col items-center bg-white border border-gray-200 rounded-lg  md:flex-row  hover:bg-gray-100  h-10"
-                                    key={count}
-                                >
-                                    <h1 className="font-normal text-gray-700 my-2 px-2">{rating} ดาว ({count})</h1>
-                                </button>
-                               ))}
-                              
+
+                                {
+                                    ArrayStar.map((value, index) => (
+                                        <button
+                                            className="flex flex-col items-center bg-white border border-gray-200 rounded-lg  md:flex-row  hover:bg-gray-100  h-10"
+                                            key={index}
+                                            onClick={() => commentFilter(value)}
+                                        >
+                                            <h1 className="font-normal text-gray-700 my-2 px-2">{value} ดาว ({state.comment.filter((item) => item.rating === value).length})</h1>
+                                        </button>
+                                    ))
+                                }
                             </div>
 
                         </div>
@@ -129,7 +158,7 @@ export default function Comment({
                     แสดงความคิดเห็น
                     </button>
                     
-                    {state.comment.length !== 0 ? state.comment.map((item, i) => (
+                    {cache.length !== 0 ? cache.map((item, i) => (
                         <div className="flex flex-row gap-2 mt-8 w-full" key={i}>
                         <div className="">
                             <Image
