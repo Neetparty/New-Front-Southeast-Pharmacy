@@ -57,7 +57,7 @@ export async function Login(email:string, password: string) {
             role: string;
             image: string;
             user_id: string;
-    }}>("/login", {
+    }, token:string}>("/login", {
         method:"POST",
         data:{
             email,

@@ -4,11 +4,6 @@ import { session } from "./session";
 
 const source:CancelTokenSource = axios.CancelToken.source();
 
-export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_APP_BACKEND_URL,
-  withCredentials: true,
-  cancelToken : source.token,
-})
 
 type MakeRequest<T> = {
   error: any;
@@ -18,7 +13,7 @@ type MakeRequest<T> = {
 export async function makeRequest<T>(url:string, options:AxiosRequestConfig): Promise<MakeRequest<T>> {
   
   const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_APP_SERVER,
+    baseURL: process.env.NEXT_PUBLIC_APP_BACKEND_URL,
     withCredentials: true,
     cancelToken: source.token,
   })
@@ -27,7 +22,7 @@ export async function makeRequest<T>(url:string, options:AxiosRequestConfig): Pr
   api.interceptors.request.use((config) => {
     const token: string = localStorage.getItem('token') as string
 
-    config.headers["authorization"] = `Bearer ${token}`
+    config.headers["authorization"] = `${token}`
     config.headers["Content-Type"] = "application/json"
     config.headers["Accept"] = "application/json"
     return config

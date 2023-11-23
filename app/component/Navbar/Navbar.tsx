@@ -83,15 +83,11 @@ export default function Navbar() {
 
     useEffect(() => {
         const token = localStorage.getItem('token') as string
-        const localUser = localStorage.getItem('user') as string
 
-        if (localUser && !user.user_id  && token) {
+        if (token) {
             loadUser()
         }
-        else if(!localUser && !user.user_id && token) {
-            loadUser()
-        }
-        else if(!localUser && !user.user_id && !token) {
+        else{
             loadBannerAndCategory()
         }
 
@@ -100,6 +96,7 @@ export default function Navbar() {
     async function handleLogout() {
         const {data, error} = await LogOut();
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
         dispatch(removeUser(null));
         window.location.reload();
     }

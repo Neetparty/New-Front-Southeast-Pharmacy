@@ -202,6 +202,7 @@ export default function DialogLogin({
                     user_id: data.user.user_id,
                     user_name: data.user.user_name
                 }))
+                localStorage.setItem("token", data.token)
                 dispatch(addUser(user))
             }
         }
