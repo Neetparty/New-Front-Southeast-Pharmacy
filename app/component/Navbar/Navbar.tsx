@@ -293,6 +293,7 @@ export default function Navbar() {
 
 
 function checkCookieExist(cookieName:string) {
+    
     const cookies = document.cookie.split(';');
 
     for (let i = 0; i < cookies.length; i++) {
