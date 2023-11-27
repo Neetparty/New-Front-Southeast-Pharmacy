@@ -18,7 +18,6 @@ export async function UpdateUserInfo(user_name: string, first_name: string, last
     form.append("user_name", user_name);
     form.append("first_name", first_name);
     form.append("last_name", last_name);
-    
 
     return await makeRequest<{user: FirstTabState, msg:string}>(`/users`, {
          method:"PUT",

@@ -27,10 +27,11 @@ export default function Product({ product, state, rowsPerPage, setState, lang, h
       <div className=" sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-8 justify-items-center flex gap-2 flex-wrap">
         {product.length !== 0 && product.slice((state.currentPage - 1) * rowsPerPage, (state.currentPage * rowsPerPage)).map((item, key) => (
           <React.Fragment key={key}>
+            {/*@ts-ignore*/}
             <CardDetail
               handleLang={handleLang}
               //@ts-ignore
-              item={item}
+              {...item}
 
             />
           </React.Fragment>

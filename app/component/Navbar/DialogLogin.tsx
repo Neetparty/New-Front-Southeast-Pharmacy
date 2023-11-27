@@ -183,7 +183,7 @@ export default function DialogLogin({
             }
             else {
                 setState(prev => ({ ...prev, loading: false, openLogin: false, openRegister: false }))
-                toast.success("ลงทะเบียนสำเร็จแล้ว")
+                toast.success("เข้าสู่ระบบสำเร็จแล้ว")
                 let user: UserRedux = {
                     email: data.user.email,
                     first_name: data.user.first_name,

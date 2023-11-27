@@ -11,15 +11,15 @@ import { useTranslation } from 'react-i18next';
 export default function ThirdTabAddAddress({setState, addressRef}:{setState:React.Dispatch<SetStateAction<ThirdTab>>, addressRef:React.MutableRefObject<Address[]>}) {
     const { t, i18n } = useTranslation('translation');
     const [subState, setSubState] = useState<ThirdTabAddAddressState>({
-        addresName: "บ้านมิก",
-        firstName: "ชิษณุพงศ์",
-        lastName: "เจตน์อัศวภิรมย์",
-        addressDes: "99/73 หมู่บ้านสิรีธร",
-        subDistrict: "ลำลูกกา",
-        district: "คูคต",
-        province: "ปทุมธานี",
-        postalCode: "12130",
-        telephone: "0948652696",
+        addresName: "",
+        firstName: "",
+        lastName: "",
+        addressDes: "",
+        subDistrict: "",
+        district: "",
+        province: "",
+        postalCode: "",
+        telephone: "",
         position: {
             lat: null,
             lng: null,

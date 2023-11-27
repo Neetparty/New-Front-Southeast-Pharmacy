@@ -270,6 +270,8 @@ export default function Navbar() {
                handleLogout={handleLogout}
                t={t}
                handleClose={handleClose}
+               state={state}
+            setState={setState}
                />
             </div>
 
