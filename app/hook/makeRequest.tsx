@@ -21,7 +21,7 @@ export async function makeRequest<T>(url:string, options:AxiosRequestConfig): Pr
 
   api.interceptors.request.use((config) => {
     const token: string = localStorage.getItem('token') as string
-    config.headers["authorization"] = `${token}`
+    config.headers["authorization"] = token || ''
     return config
   })
 
