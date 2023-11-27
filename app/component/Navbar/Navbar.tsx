@@ -63,7 +63,7 @@ export default function Navbar() {
 
     
     const switchLang = (lang: string) => {
-        window.localStorage.setItem('lang', lang)
+        localStorage.setItem('lang', lang)
         setState(prev => ({...prev, lang:lang}))
         dispatch(addLang(lang));
         return i18n.changeLanguage(lang)
@@ -71,11 +71,13 @@ export default function Navbar() {
 
     useEffect(() => {
         
-        if(typeof window !== 'undefined' && window.localStorage.getItem('lang')){
-            setState(prev  => ({...prev, lang:window.localStorage.getItem("lang") || "th"}))
+        if(localStorage.getItem('lang') as string) {
+            i18n.changeLanguage(localStorage.getItem('lang') as string)
+            setState(prev  => ({...prev, lang:localStorage.getItem("lang") || "th"}))
         }
         else {
-            window.localStorage.setItem("lang", "th")
+            i18n.changeLanguage("th")
+            localStorage.setItem("lang", "th")
         }
         
     }, [])

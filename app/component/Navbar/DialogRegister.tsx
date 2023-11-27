@@ -39,12 +39,12 @@ export default function DialogRegister({state,setState, ...props}:{
     // })
     
     const [subState, setSubState] = useState({
-        email: "mix@gmail.com",
-        first_name: "mix",
-        last_name: "jate",
-        password: "123",
+        email: "",
+        first_name: "",
+        last_name: "",
+        password: "",
         visible: false,
-        confirmPassword: "123",
+        confirmPassword: "",
         loading:false
     })
 
