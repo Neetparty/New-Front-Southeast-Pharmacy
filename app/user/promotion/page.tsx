@@ -111,7 +111,9 @@ export default function Page() {
                 {state.promotion.length !== 0 &&
                     state.promotion.map((item, i) => (
                         <div className="" key={i}>
-                            <h1 className="text-center cursor-pointer mt-8 text-slate-600 text-4xl font-semibold">{item.promotion_name}</h1>
+                            <h1 className="text-center cursor-pointer mt-8 text-slate-600 text-4xl font-semibold">{
+                                handleLang(item.promotion_name, item.promotion_name_en, item.promotion_name_cn)
+                            }</h1>
                             <hr className="border-slate-200 my-4" />
                             {item.Promotion_product.length !== 0 && 
                              <PromotionSlider

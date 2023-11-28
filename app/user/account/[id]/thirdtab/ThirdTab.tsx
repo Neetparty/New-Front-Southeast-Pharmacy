@@ -2,7 +2,7 @@
 import { Icon } from '@iconify/react';
 import { useEffect, useRef, useState } from 'react';
 import ThirdTabAddAddress from './ThirdTab-add-address';
-import { Address, ThirdTab } from '../account';
+import type { Address, ThirdTab } from '../account';
 import { DeleteAddress, GetAddress } from '../account-api';
 import { toast } from 'react-toastify';
 import { Circular } from '@/app/component/Loading/Circular';
