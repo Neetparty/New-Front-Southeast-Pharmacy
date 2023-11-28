@@ -1,5 +1,5 @@
 "use client"
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Address, ThirdTab, ThirdTabAddAddressState } from "../account";
 import Input from "@/app/component/Input/Input";
 import GoogleMapComponent from '../GoogleMapComponent';
@@ -26,6 +26,10 @@ export default function ThirdTabAddAddress({setState, addressRef}:{setState:Reac
         },
         loading:false
     })
+
+    // useEffect(() => {
+    //     console.log(subState)
+    // }, [subState])
 
     return (
         <>
@@ -130,6 +134,8 @@ export default function ThirdTabAddAddress({setState, addressRef}:{setState:Reac
                     <h6> {t("addressMark")} </h6>
                     <GoogleMapComponent
                     setSubState={setSubState}
+                    lat={subState.position.lat? subState.position.lat : 13.94994400987989}
+                    lng={subState.position.lng? subState.position.lng : 100.61974684657837}
                     />
                 </div>
 
