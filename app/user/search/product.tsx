@@ -24,7 +24,7 @@ export default function Product({ product, state, rowsPerPage, setState, lang, h
   return (
 
     <>
-      <div className=" sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-8 justify-items-center flex gap-2 flex-wrap">
+      <div className="sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-8 justify-items-center flex gap-2 flex-wrap">
         {product.length !== 0 && product.slice((state.currentPage - 1) * rowsPerPage, (state.currentPage * rowsPerPage)).map((item, key) => (
           <React.Fragment key={key}>
             {/*@ts-ignore*/}
@@ -38,13 +38,15 @@ export default function Product({ product, state, rowsPerPage, setState, lang, h
         ))}
       </div>
       {/* {state.countProduct === 0 &&  */}
-      <Pagination
+      <div className="my-8" >
+        <Pagination
         count={state.countProduct}
         rowsPerPage={rowsPerPage}
         currentPage={state.currentPage}
         setCurrentPage={handleChangePage}
         filteredData={product}
       />
+      </div>
       {/* } */}
     </>
   );
