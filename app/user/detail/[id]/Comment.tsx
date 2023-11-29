@@ -30,6 +30,7 @@ export default function Comment({
 
     const [comment, setComment] = useState<IComment[]>([]);
     const [cache, setCache] = useState<IComment[]>(state.comment)
+    const [ active, setActive ] = useState(-1)
 
     const createCommentRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -39,6 +40,7 @@ export default function Comment({
 
     const commentFilter = (rate: number) => {
         const newComment = comment.filter(comment => comment.rating === rate);
+        setActive(rate)
         return setCache(newComment);
     }
 
@@ -88,21 +90,24 @@ export default function Comment({
                             <div className="flex flex-wrap justify-start tems-center gap-5">
 
                                 <button
-                                    className="flex flex-col items-center bg-white border border-gray-200 rounded-lg  md:flex-row  hover:bg-gray-100 h-10"
-                                    onClick={() => setCache(state.comment)}
+                                    className={`flex flex-col items-center border border-gray-200 rounded-lg  md:flex-row   h-10 ${active === -1 ? "bg-blue-600 hover:bg-blue-800 text-white " : "bg-white hover:bg-gray-100 text-gray-700 "}`}
+                                    onClick={() => {
+                                        setCache(state.comment)
+                                        setActive(-1)
+                                    }}
                                 >
-                                    <h1 className="font-normal text-gray-700 my-2 px-2">ทั้งหมด ({state.comment.length})</h1>
+                                    <h1 className="font-normal my-2 px-2">ทั้งหมด ({state.comment.length})</h1>
                                 </button>
 
 
                                 {
                                     ArrayStar.map((value, index) => (
                                         <button
-                                            className="flex flex-col items-center bg-white border border-gray-200 rounded-lg  md:flex-row  hover:bg-gray-100  h-10"
+                                            className={`flex flex-col items-center border border-gray-200 rounded-lg  md:flex-row  hover:bg-gray-100  h-10 ${active === value ? "bg-blue-600 hover:bg-blue-800 text-white " : "bg-white hover:bg-gray-100 text-gray-700 "}`}
                                             key={index}
                                             onClick={() => commentFilter(value)}
                                         >
-                                            <h1 className="font-normal text-gray-700 my-2 px-2">{value} ดาว ({state.comment.filter((item) => item.rating === value).length})</h1>
+                                            <h1 className="font-normal my-2 px-2">{value} ดาว ({state.comment.filter((item) => item.rating === value).length})</h1>
                                         </button>
                                     ))
                                 }
