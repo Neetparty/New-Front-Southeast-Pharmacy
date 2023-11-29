@@ -68,8 +68,6 @@ export default function Table() {
     },
   ]
 
-  console.log(state)
-
   return (
     <>
       <div className="p-8 flex flex-col gap-8">
@@ -234,19 +232,19 @@ function renderTable(item:Order, key:number){
 
     <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center ">
       <span className={"ml-3 font-medium text-slate-600 "}>
-        {item.transaction[0].payment_method}
+        {item.transaction && item.transaction[0].payment_method}
       </span>
     </th>
 
     <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center ">
       <span className={"ml-3 font-medium text-slate-600 "}>
-        {item.transaction[0].transaction_id}
+        {item.transaction && item.transaction[0].transaction_id}
       </span>
     </th>
    
     <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center ">
       <span className={"ml-3 font-medium text-slate-600 "}>
-        {item.transaction[0].gbp_reference_no}
+        {item.transaction && item.transaction[0].gbp_reference_no}
       </span>
     </th>
 
