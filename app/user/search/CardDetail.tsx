@@ -39,7 +39,7 @@ export default function CardDetail({
 
 
     return (
-        <Link href={`/user/detail/${product_id}`}>
+        <Link className="w-full h-full" href={`/user/detail/${product_id}`}>
             <div className="max-h-[31rem]  w-full border border-slate-200 rounded-xl flex flex-col bg-white text-slate-800">
             <div className="relative w-full h-[21rem] max-h-[21rem]">
                 <Image
