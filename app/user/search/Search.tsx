@@ -41,9 +41,13 @@ export default function SearchPage() {
     
     useEffect(() => {
         if(cate !== ""){
-            handleSearch()
+            setState(prev => ({...prev, selectCategory:cate}))
         }
-    }, [])
+    }, [cate])
+
+    useEffect(() => {
+        handleSearch()
+    }, [state.selectCategory])
     
     function handleLang(thai:string, english:string, china:string){
 

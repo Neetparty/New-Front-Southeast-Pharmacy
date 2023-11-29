@@ -54,7 +54,7 @@ export default function SubNavbar() {
                         {item.category_name.includes("วัย") && 
                         <li>
                             <Link
-                            href={"/"}
+                            href={`/user/search?cate=${item.category_id}`}
                             className=" bg-white hover:bg-slate-50 py-2 px-4 block whitespace-no-wrap"
                             >
                                 {handleLang(item.category_name, item.category_name_en, item.category_name_ch)}
@@ -74,7 +74,7 @@ export default function SubNavbar() {
                                {category.length !== 0 && category.map((item, i) => (
                                  <li className="group-hover/sub:border-l-2 " key={i}>
                                  <Link 
-                                 href="#"
+                                 href={`/user/search?cate=${item.category_id}`}
                                  className=" bg-white hover:bg-slate-50 py-2 px-8 block whitespace-no-wrap" 
                                  >
                                     {handleLang(item.category_name, item.category_name_en, item.category_name_ch)}

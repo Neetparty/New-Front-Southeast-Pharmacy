@@ -22,20 +22,22 @@ export default function Comment({
     state,
     setState,
     averageRating
-}:{
+}: {
     state: DetailState,
-    setState:  React.Dispatch<React.SetStateAction<DetailState>>
-    averageRating:string;
+    setState: React.Dispatch<React.SetStateAction<DetailState>>
+    averageRating: string;
 }) {
 
     const [comment, setComment] = useState<IComment[]>([]);
     const [cache, setCache] = useState<IComment[]>(state.comment)
 
-    const createCommentRef = useRef<HTMLTextAreaElement  | null>(null)
+    const createCommentRef = useRef<HTMLTextAreaElement | null>(null)
 
-    const ArrayStar = [5,4,3,2,1];
+    const ArrayStar = [5, 4, 3, 2, 1];
 
-    const commentFilter = (rate:number) => {
+    const user = localStorage.getItem("user") as string
+
+    const commentFilter = (rate: number) => {
         const newComment = comment.filter(comment => comment.rating === rate);
         return setCache(newComment);
     }
@@ -45,34 +47,34 @@ export default function Comment({
         setCache(state.comment);
     }, [state.comment])
 
-    
-    async function handleCreateComment(e:React.MouseEvent<HTMLButtonElement>) {
+
+    async function handleCreateComment(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
-        const {rating, product} = state;
-        if(!createCommentRef.current?.value){
+        const { rating, product } = state;
+        if (!createCommentRef.current?.value) {
             toast.error("คุณจำเป็นต้องใส่ความคิดเห็นก่อน");
         }
-        else if(rating === 0){
+        else if (rating === 0) {
             toast.error("คุณจำเป็นต้องให้ดาวก่อน")
         }
         else {
-            setState(prev => ({...prev, loading:true}));
-            const {data, error} = await CreateComment(product?.product_id as string, createCommentRef.current.value, rating);
-            if(error || !data?.comment){
+            setState(prev => ({ ...prev, loading: true }));
+            const { data, error } = await CreateComment(product?.product_id as string, createCommentRef.current.value, rating);
+            if (error || !data?.comment) {
                 toast.error(error || "มีบางอย่างผิดพลาดเกี่ยวกับการแสดงความคิดเห็นของคุณ");
-                setState(prev => ({...prev, loading:false}));
+                setState(prev => ({ ...prev, loading: false }));
             }
             else {
                 toast.success("ความคิดเห็นของคุรถูกสร้างแล้ว")
-                setState(prev => ({...prev, loading:false, comment:[data.comment, ...prev.comment]}));
+                setState(prev => ({ ...prev, loading: false, comment: [data.comment, ...prev.comment] }));
             }
         }
     }
 
 
     return (
-    <>
-     <div className="flex flex-col gap-4">
+        <>
+            <div className="flex flex-col gap-4">
                 <h6 className='text-xl'>รีวิวและความคิดเห็น</h6>
                 <div className="flex gap-2 flex-col" >
                     <div
@@ -115,95 +117,109 @@ export default function Comment({
 
 
             <div className="flex flex-col gap-4 mt-8">
-                <h6 className="text-xl">แสดงความคิดเห็นของคุณเลย</h6>
-                <div className="flex gap-0.5">
-                    <Icon
-                    icon={"ic:round-star"}
-                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 1 ? "text-yellow-400" : "text-slate-500"} text-slate-500`}
-                    onClick={() => setState(prev => ({...prev, rating: 1}))}
-                    />
-                    <Icon
-                    icon={"ic:round-star"}
-                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 2 ? "text-yellow-400" : "text-slate-500"} text-slate-500`}
-                    onClick={() => setState(prev => ({...prev, rating: 2}))}
-                    />
-                    <Icon
-                    icon={"ic:round-star"}
-                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 3 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
-                    onClick={() => setState(prev => ({...prev, rating: 3}))}
-                    />
-                    <Icon
-                    icon={"ic:round-star"}
-                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 4 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
-                    onClick={() => setState(prev => ({...prev, rating: 4}))}
-                    />
-                    <Icon
-                    icon={"ic:round-star"}
-                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 5 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
-                    onClick={() => setState(prev => ({...prev, rating: 5}))}
-                    />
-                </div>
+                {
+                    user ?
+                        <>
+                            <h6 className="text-xl">แสดงความคิดเห็นของคุณเลย</h6>
+                            <div className="flex gap-0.5">
+                                <Icon
+                                    icon={"ic:round-star"}
+                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 1 ? "text-yellow-400" : "text-slate-500"} text-slate-500`}
+                                    onClick={() => setState(prev => ({ ...prev, rating: 1 }))}
+                                />
+                                <Icon
+                                    icon={"ic:round-star"}
+                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 2 ? "text-yellow-400" : "text-slate-500"} text-slate-500`}
+                                    onClick={() => setState(prev => ({ ...prev, rating: 2 }))}
+                                />
+                                <Icon
+                                    icon={"ic:round-star"}
+                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 3 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
+                                    onClick={() => setState(prev => ({ ...prev, rating: 3 }))}
+                                />
+                                <Icon
+                                    icon={"ic:round-star"}
+                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 4 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
+                                    onClick={() => setState(prev => ({ ...prev, rating: 4 }))}
+                                />
+                                <Icon
+                                    icon={"ic:round-star"}
+                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${state.rating >= 5 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
+                                    onClick={() => setState(prev => ({ ...prev, rating: 5 }))}
+                                />
+                            </div>
+                        </>
+                        :
+                        <></>
+                }
                 <div className="flex flex-col gap-2">
-                    <div className="">
-                        <textarea
-                        ref={createCommentRef}
-                        placeholder='แสดงความคิดเห็น'
-                        className="border-0 h-24 placeholder-slate-400 text-slate-600 bg-slate-100 focus:ring outline-none focus:outline-none  px-3 py-3  relative  rounded text-sm shadow  w-full "
-                        />
-                    </div>
-                    <button
-                    onClick={handleCreateComment}
-                    className="w-fit bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-lg h-fit float-right"
-                    >
-                    แสดงความคิดเห็น
-                    </button>
-                    
-                    {cache.length !== 0 ? cache.map((item, i) => (
-                        <div className="flex flex-row gap-2 mt-8 w-full" key={i}>
-                        <div className="">
-                            <Image
-                            alt='user avatar'
-                            src={item.user.image}
-                            width={64}
-                            height={64}
-                            className="rounded-full"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2 w-full">
-                            <div className="flex gap-2">
-                                <h6 className="text-lg leading-relaxed">{item.user.user_name}</h6>
-                                <div className="flex gap-0.5">
-                                    <Icon
-                                    icon={"ic:round-star"}
-                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 1 ? "text-yellow-400" : "text-slate-500"} text-slate-500`}
-                                    />
-                                    <Icon
-                                    icon={"ic:round-star"}
-                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 2 ? "text-yellow-400" : "text-slate-500"} text-slate-500`}
-                                    />
-                                    <Icon
-                                    icon={"ic:round-star"}
-                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 3 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
-                                    />
-                                    <Icon
-                                    icon={"ic:round-star"}
-                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 4 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
-                                    />
-                                    <Icon
-                                    icon={"ic:round-star"}
-                                    className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 5 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
+                    {
+                        user ?
+                            <>
+                                <div className="">
+                                    <textarea
+                                        ref={createCommentRef}
+                                        placeholder='แสดงความคิดเห็น'
+                                        className="border-0 h-24 placeholder-slate-400 text-slate-600 bg-slate-100 focus:ring outline-none focus:outline-none  px-3 py-3  relative  rounded text-sm shadow  w-full "
                                     />
                                 </div>
+                                <button
+                                    onClick={handleCreateComment}
+                                    className="w-fit bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-lg h-fit float-right"
+                                >
+                                    แสดงความคิดเห็น
+                                </button>
+                            </>
+                            : <></>
+                    }
+
+                    {cache.length !== 0 ? cache.map((item, i) => (
+                        <div className="flex flex-row gap-2 mt-8 w-full" key={i}>
+                            <div className="">
+                                <Image
+                                    alt='user avatar'
+                                    src={item.user.image}
+                                    width={64}
+                                    height={64}
+                                    className="rounded-full"
+                                />
                             </div>
-                        <p className="text-sm">{item.message}</p>
-                        <p className="text-xs text-right text-slate-500">{moment(item.created_at).locale("th").format("lll")}</p>
+                            <div className="flex flex-col gap-2 w-full">
+                                <div className="flex gap-2">
+                                    <h6 className="text-lg leading-relaxed">{item.user.user_name}</h6>
+                                    <div className="flex gap-0.5">
+                                        <Icon
+                                            icon={"ic:round-star"}
+                                            className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 1 ? "text-yellow-400" : "text-slate-500"} text-slate-500`}
+                                        />
+                                        <Icon
+                                            icon={"ic:round-star"}
+                                            className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 2 ? "text-yellow-400" : "text-slate-500"} text-slate-500`}
+                                        />
+                                        <Icon
+                                            icon={"ic:round-star"}
+                                            className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 3 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
+                                        />
+                                        <Icon
+                                            icon={"ic:round-star"}
+                                            className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 4 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
+                                        />
+                                        <Icon
+                                            icon={"ic:round-star"}
+                                            className={`w-6 h-6 cursor-pointer hover:text-yellow-300 ${item.rating >= 5 ? "text-yellow-400" : "text-slate-600"} text-slate-600`}
+                                        />
+                                    </div>
+                                </div>
+                                <p className="text-sm">{item.message}</p>
+                                <p className="text-xs text-right text-slate-500">{moment(item.created_at).locale("th").format("lll")}</p>
+                            </div>
                         </div>
-                    </div>
                     ))
-                    :
-                    <h6 className="text-xl text-center text-slate-700 ">ดูเหมือนจะยังไม่มีใครแสดงความคิดเห็นเลย</h6>
-                }
+                        :
+                        <h6 className="text-xl text-center text-slate-700 ">ดูเหมือนจะยังไม่มีใครแสดงความคิดเห็นเลย</h6>
+                    }
                 </div>
-           </div>
-    </>
-)}
+            </div>
+        </>
+    )
+}
