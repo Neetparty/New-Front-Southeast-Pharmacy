@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { InSidebar } from "./InSideBar";
 import Image from "next/image";
-import Logo from "@/app/component/Navbar/logo.png"
+import Logo from "@/app/component/Navbar/logo-blue-big-crop.png"
 import { InSidebarMobile } from "./InSideBarMobile";
 
 export default function Sidebar() {
