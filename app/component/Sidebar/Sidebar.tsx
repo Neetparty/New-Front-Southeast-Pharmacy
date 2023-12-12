@@ -20,9 +20,9 @@ export default function Sidebar() {
     
 
             {/* Side Bar More than 768 px  */}
-            <div className="hidden lg:flex flex-col font-semibold bg-slate-800 overflow-y-auto text-slate-700 min-h-screen h-full w-56 sticky top-0 z-40">
+            <div className="hidden lg:flex flex-col font-semibold bg-[#303f59] overflow-y-auto text-slate-700 min-h-screen h-full w-56 sticky top-0 z-40">
                 <div className="z-50 fixed top-0 w-56">
-                    <Link href="/admin/dashboard" className="py-4 text-center">
+                    <Link href="/" className="py-4 text-center">
                         <Image
                             src={Logo}
                             alt="pharmacy-logo"

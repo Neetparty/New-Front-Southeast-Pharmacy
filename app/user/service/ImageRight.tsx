@@ -15,7 +15,7 @@ export default function ImageRight({
     <>
        <div className="flex lg:flex-row flex-col-reverse mb-8 items-center text-start gap-16">
                 <div className="w-2/3">
-                    <div className="text-2xl text-blue-800">
+                    <div className="text-2xl text-[#303f59]">
                         {title}
                     </div>
                     <div className="my-4 text-lg font-light transition-opacity ease-in duration-700 opacity-70">

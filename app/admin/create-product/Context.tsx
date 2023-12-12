@@ -123,8 +123,6 @@ async function onSubmit(e:React.FormEvent<HTMLFormElement>){
       warning_en, warning_status, weight, isSpecial
     )
 
-
-
     // console.log(data)
     if(error) {
       toast.error(error);
@@ -134,7 +132,34 @@ async function onSubmit(e:React.FormEvent<HTMLFormElement>){
     else {
       toast.success("สินค้านี้ได้ถูกสร้างแล้วเรียบร้อย")
       // router.push("/admin/list-product", {scroll: false})
-      setState(prev => ({...prev, loading: false, submit: true}));
+      setState({
+        product_id: "",
+        product_th: "",
+        product_en: "",
+        product_cn: "",
+        isSpecial: false,
+        index: 0,
+        promotion_status: true,
+        price: 0,
+        quantity: 0,
+        promotion_price: 0,
+        desc: "",
+        desc_en: "",
+        desc_ch: "",
+        warning_status: true,
+        warning: "",
+        warning_en: "",
+        warning_cn: "",
+        weight: 0,
+        category: [],
+        loading: false,
+        cateId: "none",
+        images: [],
+        imageURLs: [],
+        subImages: [],
+        subImageURLs: [],
+        submit: true,
+      });
     }
     
 
@@ -162,6 +187,12 @@ function Validation(): boolean {
     { value: desc_ch, field: 'คำอธิบาย (ภาษาจีน)' },
     { value: desc_en, field: 'คำอธิบาย (ภาษาอังกฤษ)' },
   ];
+
+  if (product_id.indexOf("P-") !== 0) {
+    toast.error("รหัสสินค้าต้องเริ่มต้นด้วย P-XXXX");
+    setState(prev => ({ ...prev, loading: false }));
+    return true;
+  }
   
   for (const param of stringParams) {
     if (typeof param.value !== 'string' || param.value.trim() === '') {

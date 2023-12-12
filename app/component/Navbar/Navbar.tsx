@@ -110,7 +110,7 @@ export default function Navbar() {
     return (
         <>
             {/* จอใหญ่ */}
-            <div className="hidden md:flex justify-around items-center text-white gap-16 h-[7vh] bg-blue-800 w-full z-10 fixed top-0">
+            <div className="hidden md:flex justify-around items-center text-white gap-16 h-[7vh] bg-[#303f59] w-full z-10 fixed top-0">
                 <Link href="/" className='flex justify-center '>
                     <Image 
                         className=''

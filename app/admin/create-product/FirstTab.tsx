@@ -3,6 +3,7 @@ import Input from "@/app/component/Input/Input";
 import { Icon } from "@iconify/react";
 import { CreateProductContext, useCreateProduct } from "./Context";
 import DropImage from "@/app/component/DropImage/DropImage";
+import { toast } from "react-toastify";
 
 
 
@@ -94,9 +95,17 @@ export default function FirstTab() {
                 <h6>ราคาสินค้า</h6>
                 <Input
                 value={state.price}
-                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setState(prev => ({...prev, price:Number(e.target.value)}))}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+
+                    if (isNaN(Number(e.target.value))) {
+                        toast.error("กรุณากรอกตัวเลข")
+                        return
+                    }
+
+                    setState(prev => ({ ...prev, price: Number(e.target.value) }))
+                }}
                 placeholder="ราคา"
-                type="number"
+                type="text"
                 />
             </div>
            
@@ -104,9 +113,17 @@ export default function FirstTab() {
                 <h6>จำนวนสินค้าในสต็อก</h6>
                 <Input
                 value={state.quantity}
-                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setState(prev => ({...prev, quantity:Number(e.target.value)}))}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+
+                    if (isNaN(Number(e.target.value))) {
+                        toast.error("กรุณากรอกตัวเลข")
+                        return
+                    }
+
+                    setState(prev => ({ ...prev, quantity: Number(e.target.value) }))
+                }}
                 placeholder="สินค้าในสต็อก"
-                type="number"
+                type="text"
                 />
             </div>
           
@@ -114,9 +131,17 @@ export default function FirstTab() {
                 <h6>น้ำหนักสินค้าต่อชิ้น (kg)</h6>
                 <Input
                 value={state.weight}
-                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setState(prev => ({...prev, weight:Number(e.target.value)}))}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+
+                    if (isNaN(Number(e.target.value))) {
+                        toast.error("กรุณากรอกตัวเลข")
+                        return
+                    }
+
+                    setState(prev => ({ ...prev, weight: Number(e.target.value) }))
+                }}
                 placeholder="สินค้าในสต็อก"
-                type="number"
+                type="text"
                 />
             </div>
 
@@ -183,9 +208,17 @@ export default function FirstTab() {
                 <h6>ราคาโปรโมชั่น</h6>
                 <Input
                 value={state.promotion_price}
-                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setState(prev => ({...prev, promotion_price:Number(e.target.value)}))}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+
+                    if (isNaN(Number(e.target.value))) {
+                        toast.error("กรุณากรอกตัวเลข")
+                        return
+                    }
+
+                    setState(prev => ({ ...prev, promotion_price: Number(e.target.value) }))
+                }}
                 placeholder="ราคา"
-                type="number"
+                type="text"
                 />
             </div>
            }
