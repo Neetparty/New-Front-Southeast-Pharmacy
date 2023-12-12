@@ -1,7 +1,7 @@
 "use client"
 import { Icon } from '@iconify/react';
 import Image from 'next/image'
-import logo from './logo.png'
+import logo from './logo-blue-big-crop.png'
 import { useEffect, useState } from 'react';
 import InsidebarUser from './InsidebarUser';
 import Link from 'next/link';
@@ -110,13 +110,12 @@ export default function Navbar() {
     return (
         <>
             {/* จอใหญ่ */}
-            <div className="hidden md:flex justify-around items-center text-white gap-16 h-[7vh] bg-[#303f59] w-full z-10 fixed top-0">
+            <div className="hidden md:flex justify-around items-center text-white gap-16 h-[52px] bg-[#303f59] w-full z-10 fixed top-0">
                 <Link href="/" className='flex justify-center '>
                     <Image 
                         className=''
                         src={logo}
-                        width={150}
-                        height={150}
+                        height={52}
                         alt="Logo"
                     />
                 </Link>
