@@ -40,6 +40,7 @@ export default function App({banner}:{banner:{image:string}[]}) {
                 alt="Picture of the flame(selled xx pieces)"
                 className=""
                 fill
+                objectFit='contain'
                />
             </div>
         </SwiperSlide>

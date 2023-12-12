@@ -36,7 +36,7 @@ export default function Footer() {
         }
     }
     return (
-        <footer className="flex flex-wrap mx-auto justify-evenly text-white p-4 md:px-16 gap-16 bg-blue-900 w-full ">
+        <footer className="flex flex-wrap mx-auto justify-evenly text-white p-4 md:px-16 gap-16 bg-[#303f59] w-full ">
             <div className="flex flex-col  gap-2">
                 <div className="flex flex-row justify-center items-center gap-2">
                     <Icon icon="iconoir:pharmacy-cross-square" className="h-8 w-8" />

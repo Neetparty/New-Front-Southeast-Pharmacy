@@ -44,7 +44,7 @@ const arr = [
 export default function page() {
     return (
         <div className="mt-8 w-full py-4 md:py-8  px-4 md:px-16 flex flex-col gap-32">
-            <h6 className="text-5xl text-center font-semibold text-blue-800 mb-8">Services</h6>
+            <h6 className="text-5xl text-center font-semibold text-[#303f59] mb-8">Services</h6>
 
         {arr.map((item, i) => (
             <div key={i}>

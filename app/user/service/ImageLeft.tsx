@@ -22,7 +22,7 @@ export default function ImageLeft({
                     />
                 </div>
                 <div className="w-2/3">
-                    <div className="text-2xl text-blue-800">
+                    <div className="text-2xl text-[#303f59]">
                         {title}
                     </div>
                     <div className="my-4 text-lg font-light transition-opacity ease-in duration-700 opacity-70">
