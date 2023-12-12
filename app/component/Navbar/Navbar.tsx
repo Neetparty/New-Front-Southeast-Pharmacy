@@ -232,7 +232,7 @@ export default function Navbar() {
 
 
                 {/* จอเล็ก */}
-            <div className="flex md:hidden justify-around items-center text-white gap-16 h-[7vh] bg-blue-800 w-full z-10 fixed top-0 ">
+            <div className="flex md:hidden justify-around items-center text-white gap-16 h-[7vh] bg-[#303f59] w-full z-10 fixed top-0 ">
                 <Link href={"/"} className='flex justify-center cursor-pointer '>
                     <Image className=''
                         src={logo}
