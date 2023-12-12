@@ -7,7 +7,7 @@ export default function CardDetail({
     handleLang,
     productName,
     productNameEn,
-    productNameCh,
+    productNameCn,
     product_name,
     product_name_en,
     product_name_cn,
@@ -26,10 +26,10 @@ export default function CardDetail({
     handleLang: (th: string, en: string, ch: string) => string;
     productName: string;
     productNameEn: string;
-    productNameCh: string;
-    product_name: string;
-    product_name_en: string;
-    product_name_cn: string;
+    productNameCn: string;
+    product_name?: string;
+    product_name_en?: string;
+    product_name_cn?: string;
     promotion_price: number;
     image: string;
     price: number;
@@ -49,7 +49,7 @@ export default function CardDetail({
             <div className="max-h-[31rem]  w-full border border-slate-200 rounded-xl flex flex-col bg-white text-slate-800">
                 <div className="relative w-full h-[21rem] max-h-[21rem]">
                     <Image
-                        alt={product_name || productName}
+                        alt={product_name || productNameCn}
                         src={image}
                         fill
                         style={{ objectFit: "contain" }}
@@ -59,7 +59,7 @@ export default function CardDetail({
                 <div className="flex flex-col h-fit relative">
 
                     <div className="p-3 ">
-                        <h6 className="text-xl font-medium line-clamp-1 text-start"> {handleLang(product_name || productName, product_name_en || productNameEn, product_name_cn || productNameCh)}</h6>
+                        <h6 className="text-xl font-medium line-clamp-1 text-start"> {handleLang(product_name || productName, product_name_en || productNameEn, product_name_cn || productNameCn)}</h6>
                         <h6 className="text-base line-clamp-1 text-slate-500">{handleLang(description, descriptionEn, descriptionCn)}</h6>
                     </div>
 
